@@ -1,0 +1,66 @@
+package com.employee.management.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.employee.management.repositeroy.EmployeeRepo;
+import com.employee.management.repositeroy.UserRepositeory;
+import com.employee.management.utils.AddEmployee;
+import com.employee.management.utils.User;
+
+@org.springframework.stereotype.Controller
+public class Controller {
+	@Autowired
+	UserRepositeory userRepositeory;
+	EmployeeRepo employeeRepo;
+
+	@RequestMapping("/")
+	public String home() {
+		System.out.println("hiiiiiii");
+		return "Home";
+	}
+
+	@PostMapping("/login")
+	public ModelAndView Checklogin(@RequestParam String username) {
+
+		 ModelAndView mv1 = new ModelAndView("Home");
+		  Optional<User> as=userRepositeory.findByusername(username);
+		  try {
+			
+		
+		  System.out.println(as); User user=as.get(); if(as!=null) {
+		  System.out.println("login");
+		 
+		  ModelAndView mv = new ModelAndView("adminactionpage");
+		  
+		  
+		  return mv; } 
+		  else
+		 
+		return mv1;
+		  
+	}catch (Exception e) {
+		System.out.println(e.getMessage());
+		return mv1;
+	}
+	}	
+	@PostMapping("/AddEmployee")
+	public ModelAndView AddEmployee(@ModelAttribute("Data") AddEmployee add)
+	{
+		System.out.println(add);
+		AddEmployee list=employeeRepo.save(add);
+		System.out.println(list);
+		  ModelAndView mv = new ModelAndView("adminactionpage");
+		
+		return mv;
+	}
+	
+	
+}

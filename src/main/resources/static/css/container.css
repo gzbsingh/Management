@@ -1,0 +1,55 @@
+.head_color
+{
+   padding-left: 15%;
+     padding-bottom: 57px;
+    padding-top: 66px;
+    background-color: #3e7ab7;
+    
+}
+
+.navbar{
+    border-width: 1px;
+    border-style: solid;
+}
+button
+{
+    background-color: #a8cbe8;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+            
+    
+}
+
+.col-sm-2 {
+    padding-bottom: 50px;padding-top: 20px;
+    background-color: #3b658e;
+}
+.menu-item
+{
+    
+    padding-bottom: 50px;
+    padding-top: 20px;
+    background-color:#68abec;       
+       margin-bottom: 50px;
+}
+ .menu
+            {
+                margin-bottom: 10px;
+                
+            }
+            button:hover {
+                opacity: 1.4;
+            }
+
+.bg-darkl {
+    background-color: #5e8cb9!important;
+}
+.footerr{
+   background-color:  #3b658e !important;
+   color: white;
+}
+
