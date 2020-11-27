@@ -1,16 +1,17 @@
-
+<html>
+<%@page import="com.employee.management.utils.Addemployee"%>
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-   
+  
 <head>
 <title>Admin Dashboard</title>
 
-	
 
 <link href="css/container.css" rel="stylesheet" type="text/css" />
 <link href="css/admin_action_page.css" rel="stylesheet" type="text/css" />
-
+<script type="text/javascript" src="js/display.js" ></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -31,68 +32,7 @@
 	href="https://bootswatch.com/4/simplex/bootstrap.min.css" />
 
 <!--This is style for home page*/-->
-<script>
-	function AddEmp() {
 
-		var a = document.getElementById("AddEmp");
-		a.style.display = "block";
-
-		var c = document.getElementById("ViewAtt");
-		c.style.display = "none";
-
-		var d = document.getElementById("YourPro");
-		d.style.display = "none";
-		var e = document.getElementById("EmpList");
-		e.style.display = "none";
-
-	}
-	function ViewAtt() {
-
-		var a = document.getElementById("AddEmp");
-		a.style.display = "none";
-
-		var c = document.getElementById("ViewAtt");
-		c.style.display = "block";
-
-		var d = document.getElementById("YourPro");
-		d.style.display = "none";
-
-		var e = document.getElementById("EmpList");
-		e.style.display = "none";
-
-	}
-	function YourPro() {
-
-		console.log("function called");
-		var a = document.getElementById("AddEmp");
-		a.style.display = "none";
-		console.log("after add emp");
-
-		var c = document.getElementById("ViewAtt");
-		c.style.display = "none";
-		console.log("after view att");
-		var e = document.getElementById("EmpList");
-		e.style.display = "none";
-		console.log("after emp list");
-		var d = document.getElementById("YourPro");
-		d.style.display = "block";
-		console.log("it works");
-
-	}
-	function EmpList() {
-
-		var c = document.getElementById("ViewAtt");
-		c.style.display = "none";
-
-		var d = document.getElementById("YourPro");
-		d.style.display = "none";
-		var a = document.getElementById("AddEmp");
-		a.style.display = "none";
-		var e = document.getElementById("EmpList");
-		e.style.display = "block";
-
-	}
-</script>
 </head>
 <body>
 	<div class="head_color">
@@ -131,9 +71,9 @@
 					<button class="menu">Present</button>
 					<button class="menu" onclick="AddEmp()">Add Employee</button>
 
-					<button class="menu" onclick="ViewAtt()">View Attendence</button>
+					<button class="menu" onclick="ViewAtt()" >View Attendence</button>
 					<button class="menu" onclick="YourPro()">Your Profile</button>
-					<button class="menu" onclick="EmpList()">Employee List</button>
+					<button class="menu" onclick="EmpList()" >Employee List</button>
 
 
 				</div>
@@ -151,25 +91,24 @@
 
 							<tr>
 								<td><label>Profile photo</label></td>
-								<td><input type="file" name="path" required /></td>
-								<td><label>Employee id(*)</label></td>
-								<td><input type="text" name="emp_id" required /></td>
+								<td><input type="file" name="image" required /></td>
+								
 							</tr>
 							<tr>
 								<td><label>Employee name(*)</label></td>
-								<td><input type="text" name="Name" required /></td>
+								<td><input type="text" name="emp_Name" required /></td>
 								<td><label>Father's name(*)</label></td>
-								<td><input type="text" name="Father_name" /></td>
+								<td><input type="text" name="father_name" /></td>
 							</tr>
 							<tr>
 								<td>Date of birth</td>
-								<td><input type="date" name="dob" /></td>
+								<td><input type="date" name="DOB" pattern="yyyy-mm-dd" /></td>
 								<td><label>City</label></td>
 								<td><input type="text" name="City" /></td>
 							</tr>
 							<tr>
 								<td><label>Pin code</label></td>
-								<td><input type="text" name="Pincode" required /></td>
+								<td><input type="text" name="PinCode" required /></td>
 								<td><label>Mobile</label></td>
 								<td><input type="text" name="Mobile" required /></td>
 							</tr>
@@ -177,29 +116,29 @@
 								<td><label>Email (*)</label></td>
 								<td><input type="text" name="Email" required /></td>
 								<td><label>Blood group</label></td>
-								<td><input type="text" name="Blood_group" /></td>
+								<td><input type="text" name="BloodGroup" /></td>
 							</tr>
 							<tr>
 								<td><label>Qualification</label></td>
 								<td><input type="text" name="Qualification" required /></td>
 								<td><label>Bank account</label></td>
-								<td><input type="text" name="Account" /></td>
+								<td><input type="text" name="Bank_Acc" /></td>
 							</tr>
 							<tr>
 								<td><label>Join date</label></td>
-								<td><input type="date" name="Join_date" required /></td>
+								<td><input type="date" name="JoinDate" pattern="yyyy-mm-dd" required /></td>
 								<td><label>Experience</label></td>
 								<td><input type="text" name="Exp" /></td>
 							</tr>
 							<tr>
 								<td><label>Pan no.</label></td>
-								<td><input type="text" name="Pan_no" /></td>
+								<td><input type="text" name="PanNo" /></td>
 								<td><label>Aadhar no.</label></td>
-								<td><input type="text" name="Aadhar_no" /></td>
+								<td><input type="text" name="AadharNo" /></td>
 							</tr>
 							<tr>
 								<td><label>Employee type</label></td>
-								<td><input type="text" name="Role" /></td>
+								<td><input type="text" name="empType" /></td>
 							</tr>
 						</table>
 						<button type="Submit" name="btn_Add" value="Submit">Submit</button>
@@ -208,46 +147,7 @@
 
 				</span>
 
-				<!-- Employee List Span  -->
-				<span id="EmpList" style="display: none">
-					<div class="container">
-						<center>
-							<b><h2>Employee's list</h2> <b>
-							
-						</center>
-
-
-						<center>
-							<p>
-							<h4>Your Branch employees</h4>
-							</p>
-						</center>
-						<table class="table">
-							<thead>
-								<tr>
-									<th>SR.No</th>
-									<th>ID</th>
-									<th>Name</th>
-									<th>Mobile</th>
-									<th>Email</th>
-									<th>Qualification</th>
-									<th>Join date</th>
-
-
-								</tr>
-							</thead>
-							<tbody>
-						
-							
-							  <tr>
-                             <th scope="row"></th>
-     						 
-  						  </tr>
- 				 </tbody>
- 						
-						</table>
-
-					</div>
+				
 				</span>
 				<!-- View Attendance Span  -->
 				<span id="ViewAtt" style="display: none">
@@ -359,9 +259,7 @@
 
 
 														<div class="row">
-                                                          <%--   <c:forEach items="${DataValues}" var="league">
-                                                            </c:forEach>
- --%>
+                                                          
 															<div class="col-sm-3 col-md-2 col-5">
 																<label style="font-weight: bold;">Full Name</label>
 															</div>

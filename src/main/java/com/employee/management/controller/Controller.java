@@ -1,29 +1,45 @@
 package com.employee.management.controller;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.employee.management.repositeroy.EmployeeRepo;
 import com.employee.management.repositeroy.UserRepositeory;
-import com.employee.management.utils.AddEmployee;
+import com.employee.management.utils.Addemployee;
 import com.employee.management.utils.User;
+import com.sun.el.parser.ParseException;
 
 @org.springframework.stereotype.Controller
 public class Controller {
+	
+	
+	
 	@Autowired
 	UserRepositeory userRepositeory;
-	EmployeeRepo employeeRepo;
-
+	
+	@Autowired
+	 EmployeeRepo employeeRepo;
+;
+	
 	@RequestMapping("/")
 	public String home() {
-		System.out.println("hiiiiiii");
+	
 		return "Home";
 	}
 
@@ -50,17 +66,33 @@ public class Controller {
 		System.out.println(e.getMessage());
 		return mv1;
 	}
-	}	
+		
+}
 	@PostMapping("/AddEmployee")
-	public ModelAndView AddEmployee(@ModelAttribute("Data") AddEmployee add)
+	public ModelAndView AddEmployee(@ModelAttribute Addemployee addemployee, @RequestParam("image") MultipartFile file,BindingResult bindingResult) throws IOException, ParseException
 	{
-		System.out.println(add);
-		AddEmployee list=employeeRepo.save(add);
-		System.out.println(list);
-		  ModelAndView mv = new ModelAndView("adminactionpage");
+		 if (bindingResult.hasErrors()) {
+	            System.out.println(bindingResult.getAllErrors());
+	        }
+		byte[] imageBytes = file.getBytes();
+	  
+	     	       addemployee.setPhoto(imageBytes);
+	         employeeRepo.save(addemployee);
+	         ModelAndView mv = new ModelAndView("adminactionpage");
+	 		
+		  
 		
 		return mv;
-	}
 	
+	}
+	@GetMapping("/emplist")
+	public void getemplist(Model model)
+	{
+		List list=employeeRepo.findAll();
+		System.out.println(list);
+		model.addAttribute("data",list);
+		
+		
+	}
 	
 }

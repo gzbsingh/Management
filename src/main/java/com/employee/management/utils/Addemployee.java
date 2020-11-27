@@ -4,10 +4,17 @@ import java.io.File;
 import java.sql.Blob;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,27 +25,35 @@ import lombok.ToString;
 @Setter
 @ToString
 @AllArgsConstructor
-public class AddEmployee {
 
+public class Addemployee {
+
+public Addemployee() {
+		// TODO Auto-generated constructor stub
+	}
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
-private	int empId;
-private File photo;
+private	Integer empId;
+@Lob
+private byte[] photo;
 private String emp_Name;
-	
-private Date DOB;
-private int pinCode;
-private	String Email;
-private String Qualification;
-private Date JoinDate;
-private 	String PanNo;
-private String empType;
 private String father_Name;
+private String DOB;
 private String City;
+private Integer pinCode;
 private String Mobile;
+private	String Email;
 private String BloodGroup;
+private String Qualification;
 private String Bank_Acc;
+private String JoinDate;
 private int Exp;
-private double AdharNo;
-	
+private String PanNo;
+private Double AadharNo;
+private String empType;
+
+
+
+
+
 }
